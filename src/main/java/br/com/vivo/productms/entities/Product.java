@@ -8,8 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
+
+import br.com.vivo.productms.dto.ProductRequestDto;
 
 @Entity
 @Table(name = "tb_product")
@@ -22,11 +22,11 @@ public class Product implements Serializable{
 	private String id;
 	
 
-	@NotBlank(message="Nome obrigatorio")
+	//@NotBlank(message="Nome obrigatorio")
 	private String name;
-	@NotBlank(message="Descrição obrigatoria")
+	//@NotBlank(message="Descrição obrigatoria")
 	private String description;
-	@Positive(message="O preço deve ter valor positivo")
+	//@Positive(message="O preço deve ter valor positivo")
 	private Double price;
 	
 	public String getId() {
@@ -69,6 +69,13 @@ public class Product implements Serializable{
 		this.price = price;
 	}
 	
+	public Product(ProductRequestDto product) {
+		super();
+		this.name = product.getName();
+		this.description = product.getDescription();
+		this.price = product.getPrice();
+	}
+	
 	public Product() {
 
 	}
@@ -88,11 +95,6 @@ public class Product implements Serializable{
 			return false;
 		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
-	}
-	
-
-
-	
-	
+	}	
 	
 }
